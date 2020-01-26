@@ -1,7 +1,3 @@
-import random
-
-max_PrimLength = 1000000000000
-
 alphabet = {"A": 2, "B": 3, "C": 4,
             "D": 5, "E": 6, "F": 7, "G": 8,
             "H": 9, "I": 10, "J": 11, "K": 12,
@@ -67,14 +63,3 @@ def encrypt(text, public_key):
     key, n = public_key
     ctext = [pow(alphabet[char], key, n) for char in text]
     return ctext
-
-
-if __name__ == '__main__':
-    public_key, private_key = generate_keys()
-    print("Public: ", public_key)
-    print("Private: ", private_key)
-
-    ctext = encrypt("HELLO WORLD", public_key)
-    print("encrypted  =", ctext)
-    plaintext = decrypt(ctext, private_key)
-    print("decrypted =", plaintext)
