@@ -12,7 +12,7 @@ alphabet_invert = {v: k for k, v in alphabet.items()}
 
 def egcd(a, b):
     """
-    calculates the modular inverse from e and phi
+    calculates the modular inverse from a and b
     """
     if a == 0:
         return b, 0, 1
@@ -34,15 +34,16 @@ def generate_keys(p, q, e):
 
     n = p * q
     print("n ", n)
-    '''phi(n) = phi(p)*phi(q)'''
+
     phi = (p - 1) * (q - 1)
     print("phi ", phi)
 
     print("e=", e, " ", "phi=", phi)
-    '''d[1] = modular inverse of e and phi'''
+
+    # get modular inverse of e and phi
     d = egcd(e, phi)[1]
 
-    '''make sure d is positive'''
+    # make sure d is positive
     d = d % phi
     if d < 0:
         d += phi

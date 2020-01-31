@@ -23,20 +23,27 @@ def bt2_command(e, n, text):
     e = int(e.get())
     n = int(n.get())
 
-    message = text.get("1.0", "end-1c")
-    message = encrypt(message, (e, n))
+    try:
+        message = text.get("1.0", "end-1c")
+        message = encrypt(message, (e, n))
 
-    text.delete('1.0', END)
-    text.insert(INSERT, message)
+        text.delete('1.0', END)
+        text.insert(INSERT, message)
 
-    message = text.get("1.0", "end-1c")
-    save_to_file("mensagem_criptografada.txt", message)
+        message = text.get("1.0", "end-1c")
+        save_to_file("mensagem_criptografada.txt", message)
+
+    except KeyError as e:
+        print(e)
+        text.delete('1.0', END)
+        text.insert(INSERT, "VOCE DIGITOU CARATERES INVALIDOS\nDIGITE LETRAS DE A ATE Z MAIUSCULAS")
 
 
 def bt3_command(p, q, e, text):
     p = int(p.get())
     q = int(q.get())
     e = int(e.get())
+
     message = text.get("1.0", "end-1c")
 
     _, private = generate_keys(int(p), int(q), int(e))
@@ -64,13 +71,6 @@ tab_control.add(tab1, text='Gerar chave')
 tab_control.add(tab2, text='Criptografar')
 tab_control.add(tab3, text='Descriptografar')
 
-'''
-    FIRST WINDOW
-    – Solicite que o usuário digite um par de números primos p e q e um expoente
-        e relativamente primo a (p − 1)(q − 1).
-    – Salve, no diretório de execução do programa, um arquivo txt com os dois
-        números que formam a chave pública.
-'''
 lbl1_0 = Label(tab1, text='', padx=100, pady=50)
 lbl1_0.grid(column=0, row=0)
 
@@ -99,12 +99,6 @@ lbl1_0.grid(column=2, row=5)
 btn_1 = Button(tab1, text="gerar chaves", command=lambda: bt1_command(txt1_1, txt1_2, txt1_4))
 btn_1.grid(column=3, row=6)
 
-'''
-    SECOND WINDOW
-    – Solicite que o usuário digite a mensagem de texto a encriptar.
-    – Solicite que o usuário digite a chave pública recebida previamente.
-    – Salve, no diretório de execução do programa, um arquivo txt com a mensagem encriptada
-'''
 lbl2 = Label(tab2, text='Digite a mensagem, \n ou o nome do arquivo:', padx=5, pady=5)
 lbl2.grid(column=0, row=1)
 
@@ -129,13 +123,6 @@ rad2_2 = Radiobutton(tab2, text='Texto', value=1)
 rad2_1.grid(column=3, row=2)
 rad2_2.grid(column=3, row=3)
 
-
-'''
-    THIRD WINDOW
-    – Solicite que o usuário digite p, q e e.
-    – Salve, no diretório de execução do programa, um 
-        arquivo txt com a mensagem desencriptada.
-'''
 lbl3 = Label(tab3, text='Digite a mensagem criptografada,\n ou o nome do arquivo:', padx=5, pady=5)
 lbl3.grid(column=0, row=1)
 
