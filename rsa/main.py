@@ -1,6 +1,6 @@
 from tkinter import Tk, ttk, scrolledtext, messagebox
 from tkinter import *
-from rsa.rsa import *
+from rsa import *
 
 
 def save_to_file(file, value):

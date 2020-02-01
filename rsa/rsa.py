@@ -11,9 +11,8 @@ alphabet_invert = {v: k for k, v in alphabet.items()}
 
 
 def egcd(a, b):
-    """
-    calculates the modular inverse from a and b
-    """
+    # calculates the modular inverse from a and b
+
     if a == 0:
         return b, 0, 1
     else:
@@ -22,9 +21,8 @@ def egcd(a, b):
 
 
 def gcd(a, b):
-    """
-    calculates the gcd of two ints
-    """
+    # calculates the gcd of two ints
+
     while b != 0:
         a, b = b, a % b
     return a
